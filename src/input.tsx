@@ -7,9 +7,10 @@ import CheckoutForm_split from './checkOutForm_split';
 import './css/basic.css';
 import { IComponentProps } from './interfaces';
 import { component, renderOutcomes } from './utils/wrapper';
-//your stripe public key goes here
+// your stripe public key goes here
 const stripePromise = loadStripe(
-    '',
+    // 'pk_test_HfgjeCQT6EEm3ttmw0vXXVAO00lpsLu7yD',
+    'pk_live_VcG7g0XzgFwOsTI0e8q6QXCH00KSWByLY1',
   );
 
 const App = ({ id, model, outcomes, getContentValue, getAttribute, onChange, onEvent, className, flowKey }: IComponentProps) => {

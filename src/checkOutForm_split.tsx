@@ -76,21 +76,17 @@ class CheckoutFormSplit extends React.Component<MyState> {
 
     const data = new FormData(ev.target);
 
-    console.log('Form Data' + data.get('card_holder_name'));
-
     const custData = {
       name: data.get('card_holder_name'),
     };
 
     const card = elements.getElement(CardNumberElement);
-    const result = await stripe.createToken(card, 'roshan');
+    const result = await stripe.createToken(card, 'CCNSW');
     if (result.error) {
       alert('payment Failed' + result.error.message);
     } else {
-      console.log(result.token.card.id + '|'  + result.token.id + '|' + data.get('card_holder_name'));
-      const paymentToken = result.token.card.id + '|'  + result.token.id + '|' + data.get('card_holder_name');
+      const paymentToken = result.token.card.id + '|'  + result.token.id + '|' + data.get('card_holder_name') + '|' + result.token.card.last4 + '|' + result.token.card.exp_month + '|' + result.token.card.exp_year;
       onChange(JSON.stringify(paymentToken));
-      alert('payment Success');
 
       const outcomes = manywho.model.getOutcome('34b17de1-fdbf-403e-84e0-7409c48b2be7', flowKey);
       manywho.engine.move(outcomes, flowKey);
@@ -128,7 +124,7 @@ class CheckoutFormSplit extends React.Component<MyState> {
         />
 
         <button className="stripPayButton" type="submit" >
-          Pay
+          Donate
         </button>
       </form>
 
